@@ -3,6 +3,7 @@ const babel = require('gulp-babel');
 const uglify = require('gulp-uglify');
 const sass = require('gulp-sass');
 const connect = require('gulp-connect');
+const cleanCSS = require('gulp-clean-css');
 
 function html() {
   console.log('HTML called');
@@ -26,6 +27,7 @@ function css() {
   console.log('CSS called');
   return src('./src/sass/*.scss')
     .pipe(sass().on('error', sass.logError))
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(dest('./dist/assets/css'))
     .pipe(connect.reload());
 }
